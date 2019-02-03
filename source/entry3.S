@@ -8,13 +8,13 @@
  * We perform minimal setup before dropping to the hypervisor at EL2.
  */
 
-    .global entry3
-    .type entry3, @function
-entry3:
+#include "asm.h"
+
+globalfunc entry3
     // Install dummy vector table; each entry branches-to-self
     ADRP    x0, dummy_vectors
     MSR     VBAR_EL3, x0
-    
+
     //
     // Configure SCR_EL3
     //
@@ -59,3 +59,4 @@ entry3:
     ADR     x0, entry2
     MSR     ELR_EL3, x0
     ERET
+endfunc entry3
