@@ -39,6 +39,9 @@ globalfunc pl011_init
 endfunc pl011_init
 
 
+/*
+ * Transmit a character; if the character is '\n', first transmit '\r'.
+ */
 globalfunc pl011_putc
     LDR     x1, =PLATFORM_PL011_BASE
     .macro wait_for_tx_ready
@@ -60,6 +63,9 @@ globalfunc pl011_putc
 endfunc pl011_putc
 
 
+/*
+ * Transmit a null-terminated string.
+ */
 globalfunc pl011_puts
     push    x20, x30
     MOV     x20, x0
@@ -74,6 +80,9 @@ globalfunc pl011_puts
 endfunc pl011_puts
 
 
+/*
+ * Poll the PL011 UART for a character.
+ */
 globalfunc pl011_getc
     LDR     x1, =PLATFORM_PL011_BASE
 1:
