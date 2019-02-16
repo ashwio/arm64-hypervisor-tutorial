@@ -36,7 +36,7 @@
 
 /* Stack 1-2 registers. */
 .macro push reg1:req, reg2:vararg
-    .ifnb reg2
+    .ifnb \reg2
         STP     \reg1, \reg2, [sp, #-16]!
     .else
         STP     \reg1, xzr, [sp, #-16]!
@@ -46,7 +46,7 @@
 
 /* Pop 1-2 registers. */
 .macro pop reg1:req, reg2:vararg
-    .ifnb reg2
+    .ifnb \reg2
         LDP     \reg1, \reg2, [sp], #16
     .else
         LDP     \reg1, xzr, [sp], #16
