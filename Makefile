@@ -42,7 +42,7 @@ LD := ${CROSS_COMPILE}ld
 #
 # Compiler, assembler, and linker flags
 #
-CC_FLAGS := -I$(dINC) -g -O1 -march=armv8.5-a
+CC_FLAGS := -I$(dINC) -g -O1
 AS_FLAGS := -I$(dINC) -g -O1
 LD_FLAGS := -T linker.ld
 
@@ -79,5 +79,5 @@ ${dOUT}/%.o: ${dSRC}/%.c
 ${dOUT}/%.o: ${dSRC}/%.S
 	$(AS) $(AS_FLAGS) -c $< -o $@
 
-${fOUT}: ${OBJECTS}
+${fOUT}: ${OBJECTS} linker.ld
 	${LD} $^ -o $@ ${LD_FLAGS}
