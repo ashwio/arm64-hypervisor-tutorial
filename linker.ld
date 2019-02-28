@@ -10,15 +10,14 @@ ENTRY(entry3)
 SECTIONS
 {
     . = 0x80000000;
-    _stack_end = .;
-
-    .stack (NOLOAD): {
-        . = . + 16K;
-    }
-
-    _stack_start = .;
-    . = ALIGN(4K);
     _rw_start = .;
+
+    _early_ttbase = .;
+    . = . + 4K;
+
+    _stack_end = .;
+    . = . + 16K;
+    _stack_start = .;
 
     .data : {
         *(.data);
@@ -30,6 +29,8 @@ SECTIONS
 
     . = ALIGN(4K);
     _rw_end = .;
+
+
     _exec_start = .;
 
     .text : {
@@ -40,24 +41,4 @@ SECTIONS
 
     . = ALIGN(4K);
     _exec_end = .;
-    
-    . = ALIGN(2M);
-
-    _heap_start = .;
-    .heap (NOLOAD): {
-        . = . + 2M;
-    }
-    _heap_end = .;
-
-    _vm1_start = .;
-    .vm1 (NOLOAD): {
-        . = . + 2M;
-    }
-    _vm1_end = .;
-
-    _vm2_start = .;
-    .vm2 (NOLOAD): {
-        . = . + 2M;
-    }
-    _vm2_end = .;  
 }
